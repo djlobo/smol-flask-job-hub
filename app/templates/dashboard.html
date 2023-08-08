@@ -1,0 +1,35 @@
+```html
+{% extends "base.html" %}
+
+{% block content %}
+<div id="dashboard" class="container">
+    <h1>Dashboard</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Company Name</th>
+                <th scope="col">Job Title</th>
+                <th scope="col">URL</th>
+                <th scope="col">Date of Application</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for application in applications %}
+            <tr>
+                <td>{{ application.company_name }}</td>
+                <td>{{ application.job_title }}</td>
+                <td><a href="{{ application.url }}" target="_blank">Link</a></td>
+                <td>{{ application.date_of_application }}</td>
+                <td>
+                    <a href="{{ url_for('view_application', id=application.id) }}" class="btn btn-primary">View</a>
+                    <a href="{{ url_for('edit_application', id=application.id) }}" class="btn btn-secondary">Edit</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('new_application') }}" class="btn btn-success">New Application</a>
+</div>
+{% endblock %}
+```
