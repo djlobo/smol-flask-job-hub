@@ -1,0 +1,42 @@
+```html
+{% extends "base.html" %}
+
+{% block content %}
+<div id="view-application">
+    <h1>View Application</h1>
+    <div class="application-details">
+        <h2>Company: {{ application.company_name }}</h2>
+        <h3>Job Title: {{ application.job_title }}</h3>
+        <h4>URL: <a href="{{ application.url }}">{{ application.url }}</a></h4>
+        <h4>Date of Application: {{ application.date_of_application }}</h4>
+        <h4>Resume: <a href="{{ url_for('static', filename='resumes/' + application.resume_filename) }}">Download</a></h4>
+    </div>
+    <div class="cover-letter">
+        <h2>Cover Letter</h2>
+        <p>{{ application.cover_letter }}</p>
+    </div>
+    <div class="actions">
+        <a href="{{ url_for('edit_application', id=application.id) }}" class="btn btn-primary">Edit</a>
+        <button class="btn btn-secondary" onclick="copyToClipboard('{{ application.cover_letter }}')">Copy Cover Letter</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function copyToClipboard(text) {
+        var textarea = document.createElement("textarea");
+        textarea.textContent = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+            document.execCommand('copy');
+            alert('Cover letter copied to clipboard');
+        } catch (err) {
+            console.warn('Could not copy text: ', err);
+        }
+        document.body.removeChild(textarea);
+    }
+</script>
+{% endblock %}
+```

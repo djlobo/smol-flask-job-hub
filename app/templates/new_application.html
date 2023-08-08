@@ -1,0 +1,34 @@
+```html
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Create New Job Application</h1>
+    <form id="new-application-form" method="post" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            <label for="company_name">Company Name</label>
+            {{ form.company_name(class="form-control") }}
+        </div>
+        <div class="form-group">
+            <label for="job_url">Job URL</label>
+            {{ form.job_url(class="form-control") }}
+        </div>
+        <div class="form-group">
+            <label for="job_description">Job Description</label>
+            {{ form.job_description(class="form-control") }}
+        </div>
+        <div class="form-group">
+            <label for="resume">Select Resume</label>
+            {{ form.resume(class="form-control-file") }}
+        </div>
+        <div class="form-group">
+            <label for="cover_letter">Cover Letter</label>
+            {{ form.cover_letter(class="form-control wysiwyg-editor") }}
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+</div>
+{% endblock %}
+```
+This HTML file extends the base layout and includes a form for creating a new job application. The form includes fields for the company name, job URL, job description, resume selection, and cover letter. The cover letter field uses a WYSIWYG editor for easy editing. The form data is sent as a POST request when the user clicks the "Create" button.
